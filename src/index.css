@@ -6,6 +6,8 @@
 
 @import url(../src/blocks/header/header.css);
 
+@import url(../src/blocks/auth/auth.css);
+
 @import url(../src/blocks/profile/profile.css);
 
 @import url(../src/blocks/popup/popup.css);
@@ -26,3 +28,5 @@
 @import url(../src/blocks/place/__button/_type/place__button_type_unfilled.css);
 
 @import url(../src/blocks/place/__button/_type/place__button_type_filled.css);
+
+@import url(../src/blocks/edit-box/_auth/edit-box_auth.css);

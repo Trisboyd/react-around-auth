@@ -1,6 +1,8 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
+import Login from './Login';
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
@@ -167,9 +169,16 @@ function App() {
         <div>
             <CurrentUserContext.Provider value={currentUser}>
                 <Header />
-                <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
-                    onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards}
-                    handleCardLike={handleCardLike} handleCardDelete={handleCardDelete} />
+                <Switch>
+                    <Route path='/main'>
+                        <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
+                            onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards}
+                            handleCardLike={handleCardLike} handleCardDelete={handleCardDelete} />
+                    </Route>
+                    <Route path='/login'>
+                        <Login />
+                    </Route>
+                </Switch>
                 <Footer />
                 <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
                 <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />

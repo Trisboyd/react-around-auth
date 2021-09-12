@@ -12,10 +12,11 @@
     color: #FFFFFF;
     margin: 48px auto 36.51px;
     cursor:pointer;
+    transition: opacity .2s ease-in-out .2s;
 }
 
 .edit-box__submit:hover {
-    background: rgba(0, 0, 0, 0.8);
+    opacity: .8;
 }
 
 @media screen and (max-width: 425px) {
