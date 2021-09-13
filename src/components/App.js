@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Authorization from './Authorization';
+import ProtectedRoute from './ProtectedRoute';
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
@@ -179,21 +180,24 @@ function App() {
         })
     }
 
+    // state variable for determining whether logged in or not
+    const [loggedIn, setLoggedIn] = React.useState(false);
+
     // Components
     return (
 
         <div>
             <CurrentUserContext.Provider value={currentUser}>
-                <Header name={authPage.name} 
-                path={authPage.path}
-                showLoginPage={showLoginPage}
-                showSignupPage={showSignupPage} />
+                <Header name={authPage.name}
+                    path={authPage.path}
+                    showLoginPage={showLoginPage}
+                    showSignupPage={showSignupPage} />
                 <Switch>
-                    <Route path='/main'>
-                        <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
+                    <ProtectedRoute path='/main' loggedIn={loggedIn}
+                        component={<Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
                             onAddPlaceClick={handleAddPlaceClick} onCardClick={handleCardClick} cards={cards}
-                            handleCardLike={handleCardLike} handleCardDelete={handleCardDelete} />
-                    </Route>
+                            handleCardLike={handleCardLike} handleCardDelete={handleCardDelete} />}>
+                    </ProtectedRoute>
                     <Route path='/login'>
                         <Authorization name="Log in"
                             path="/signup"
@@ -201,10 +205,10 @@ function App() {
                             setHeaderLink={showSignupPage} />
                     </Route>
                     <Route path='/signup'>
-                        <Authorization name="Sign up" 
-                        path="/login" 
-                        message="Already a member? Log in here!"
-                        setHeaderLink={showLoginPage} />
+                        <Authorization name="Sign up"
+                            path="/login"
+                            message="Already a member? Log in here!"
+                            setHeaderLink={showLoginPage} />
                     </Route>
                 </Switch>
                 <Footer />
