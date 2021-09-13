@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
-import Login from './Login';
+import Authorization from './Authorization';
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
@@ -162,13 +162,32 @@ function App() {
             .catch(err => { console.log(err) });
     }
 
+    // state variable for determining whether on login or signup page
+    const [authPage, setAuthPage] = React.useState({ name: 'Log in', path: '/login' });
+
+    function showLoginPage() {
+        setAuthPage({
+            name: 'Sign up',
+            path: '/signup'
+        })
+    };
+
+    function showSignupPage() {
+        setAuthPage({
+            name: 'Log in',
+            path: '/login'
+        })
+    }
 
     // Components
     return (
 
         <div>
             <CurrentUserContext.Provider value={currentUser}>
-                <Header />
+                <Header name={authPage.name} 
+                path={authPage.path}
+                showLoginPage={showLoginPage}
+                showSignupPage={showSignupPage} />
                 <Switch>
                     <Route path='/main'>
                         <Main onEditAvatarClick={handleEditAvatarClick} onEditProfileClick={handleEditProfileClick}
@@ -176,7 +195,16 @@ function App() {
                             handleCardLike={handleCardLike} handleCardDelete={handleCardDelete} />
                     </Route>
                     <Route path='/login'>
-                        <Login />
+                        <Authorization name="Log in"
+                            path="/signup"
+                            message="Not a member? Sign up here!"
+                            setHeaderLink={showSignupPage} />
+                    </Route>
+                    <Route path='/signup'>
+                        <Authorization name="Sign up" 
+                        path="/login" 
+                        message="Already a member? Log in here!"
+                        setHeaderLink={showLoginPage} />
                     </Route>
                 </Switch>
                 <Footer />
