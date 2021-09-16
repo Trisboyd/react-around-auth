@@ -9,6 +9,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 import ImagePopup from './ImagePopup';
+import InfoTooltip from './InfoTooltip';
 import Footer from './Footer';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -59,8 +60,14 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
+    const [isRegisteredPopupOpen, setIsRegisteredPopupOpen] = React.useState(true);
+
+    // State variables for cards
     const [selectedCard, setSelectedCard] = React.useState();
     const [cardForDelete, setCardForDelete] = React.useState();
+
+    // State Variable for Registration
+    const [isRegistered, setIsRegistered] = React.useState(false);
 
 
     // Popup functions for opening and closing
@@ -85,11 +92,16 @@ function App() {
         setSelectedCard(card);
     }
 
+    function handleRegisterClick() {
+        setIsRegisteredPopupOpen(true);
+    }
+
     function closeAllPopups() {
         setIsAddPlacePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
         setIsConfirmDeletePopupOpen(false);
+        setIsRegisteredPopupOpen(false);
         setSelectedCard();
     }
 
@@ -208,7 +220,8 @@ function App() {
                         <Authorization name="Sign up"
                             path="/login"
                             message="Already a member? Log in here!"
-                            setHeaderLink={showLoginPage} />
+                            setHeaderLink={showLoginPage} 
+                            clickSubmitButton={handleRegisterClick}/>
                     </Route>
                 </Switch>
                 <Footer />
@@ -218,6 +231,7 @@ function App() {
                 <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
                 <ImagePopup card={selectedCard} onClose={closeAllPopups} />
                 <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} cardDelete={confirmDeleteClick} />
+                <InfoTooltip isOpen={isRegisteredPopupOpen} isRegistered={isRegistered} onClose={closeAllPopups} />
             </CurrentUserContext.Provider>
         </div>
     );

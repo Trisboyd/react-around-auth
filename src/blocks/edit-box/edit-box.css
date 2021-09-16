@@ -8,6 +8,8 @@
 @import url(./__submit/_inactive/edit-box__submit_inactive.css);
 @import url(./_auth/edit-box_auth.css);
 @import url(./__submit/_auth/edit-box__submit_auth.css);
+@import url(./__register-image/edit-box__register-image.css);
+@import url(./__register-message/edit-box__register-message.css);
 
 
 .edit-box {

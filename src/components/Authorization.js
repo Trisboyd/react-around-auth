@@ -7,6 +7,16 @@ function Authorization(props) {
         props.setHeaderLink();
     }
 
+    const confirmRegister = () => {
+        // need to add the actual registration confirmation, but for now this
+        // simply opens the YOU ARE REGISTERED POPUP
+        props.clickSubmitButton();
+    }
+
+    const confirmLogin = () => {
+        // this is for the submit button for Login page, not signup
+    }
+
     return (
         <section className="auth">
             <form className="edit-box edit-box_auth">
@@ -14,7 +24,7 @@ function Authorization(props) {
                 <input type="text" className="auth__input" placeholder="Email"></input>
                 <input type="text" className="auth__input" placeholder="Password"></input>
                 <button type="submit" id="login" className="edit-box__submit edit-box__submit_auth" name="edit-box-submit"
-                    aria-label="submit" value="Login">{props.name}</button>
+                    aria-label="submit" value="Login" onClick={confirmRegister}>{props.name}</button>
                 <Link to={props.path} className="auth__text" onClick={setHeaderLink}>{props.message}</Link>
             </form>
         </section>
