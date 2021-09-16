@@ -60,7 +60,7 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
-    const [isRegisteredPopupOpen, setIsRegisteredPopupOpen] = React.useState(true);
+    const [isRegisteredPopupOpen, setIsRegisteredPopupOpen] = React.useState(false);
 
     // State variables for cards
     const [selectedCard, setSelectedCard] = React.useState();
