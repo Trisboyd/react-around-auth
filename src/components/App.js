@@ -195,6 +195,22 @@ function App() {
     // state variable for determining whether logged in or not
     const [loggedIn, setLoggedIn] = React.useState(false);
 
+    // props Object for Login
+    const loginProps = {
+        name: "Log in",
+        path: "/signup",
+        message: "Not a member? Sign up here!",
+        setHeaderLink: showSignupPage
+    }
+
+    // props Object for Signup
+    const signupProps = {
+        name: "Sign up",
+        path: "/login",
+        message: "Already a member? Log in here!",
+        clickSubmitButton: handleRegisterClick
+    }
+
     // Components
     return (
 
@@ -211,17 +227,13 @@ function App() {
                             handleCardLike={handleCardLike} handleCardDelete={handleCardDelete} />}>
                     </ProtectedRoute>
                     <Route path='/login'>
-                        <Authorization name="Log in"
-                            path="/signup"
-                            message="Not a member? Sign up here!"
-                            setHeaderLink={showSignupPage} />
+                        <Authorization
+                            props={loginProps}
+                        />
                     </Route>
                     <Route path='/signup'>
-                        <Authorization name="Sign up"
-                            path="/login"
-                            message="Already a member? Log in here!"
-                            setHeaderLink={showLoginPage} 
-                            clickSubmitButton={handleRegisterClick}/>
+                        <Authorization
+                            props={signupProps} />
                     </Route>
                 </Switch>
                 <Footer />
