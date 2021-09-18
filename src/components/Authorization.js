@@ -4,7 +4,10 @@ import * as auth from '../utils/auth';
 
 function Authorization({ props, handleRegistration, handleLogin, loggedIn }) {
 
+    // constants and state variables________________________________________________
     const history = useHistory();
+
+    const location = useLocation();
 
     const { name, message, path, clickSubmitButton } = props;
 
@@ -13,6 +16,7 @@ function Authorization({ props, handleRegistration, handleLogin, loggedIn }) {
         password: ''
     });
 
+    // changes email and password based on user input in input fields
     const handleChange = ({ target }) => {
         const { name, value } = target;
         setFormState({
@@ -21,73 +25,39 @@ function Authorization({ props, handleRegistration, handleLogin, loggedIn }) {
         });
     };
 
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-
-    //   if (password === confirmPassword) {
-    //     duckAuth.register(username, password, email).then((res) => {
-    //       if (res) {
-    //         setMessage('');
-    //         history.push('/ducks');
-    //       } else {
-    //         setMessage('Something went wrong, please try again.');
-    //       }
-    //     });
-    //   }
-    // };
-
-    const location = useLocation();
-
+    // function for handling a new registration
     const handleRegister = () => {
         if (formState.email && formState.password) {
             auth.register(formState)
-            .then((res) => {
-                if (res) {
-                    handleRegistration();
-                    // handleLogin should maybe go here so user can get to /main
-                    history.push('/main');
-                }
-            })
+                .then((res) => {
+                    if (res) {
+                        handleRegistration();
+                        // handleLogin should maybe go here so user can get to /main
+                        history.push('/main');
+                    }
+                })
         }
         clickSubmitButton();
     }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (!username || !password) return false;
-    
-    //     duckAuth
-    //       .authorize(username, password)
-    //       .then((data) => {
-    //         if (!data) {
-    //           return setMessage('Something went wrong, please try again.');
-    //         }
-    
-    //         if (data.jwt) {
-    //           setMessage('');
-    //           handleLogin();
-    //           history.push('/ducks', { newRegistration: true });
-    //         }
-    //       })
-    //       .catch((err) => console.log(err));
-    //   };
-
+    // function for handling a login
     const handleSignin = () => {
         if (!formState.email || !formState.password) {
             return false;
         }
         auth.authorize(formState)
-        .then((data) => {
-            if (!data) {
-                return;
-            }
-            if (data.token) {
-                handleLogin();
-                history.push('/main');
-            }
-        })
+            .then((data) => {
+                if (!data) {
+                    return;
+                }
+                if (data.token) {
+                    handleLogin();
+                    history.push('/main');
+                }
+            })
     }
 
+    // catch all for determining whether to register or login based on the submit button
     const handleSubmit = (event) => {
         event.preventDefault();
         if (location.pathname === '/signup') {
@@ -99,7 +69,9 @@ function Authorization({ props, handleRegistration, handleLogin, loggedIn }) {
     return (
         <section className="auth">
             <form className="edit-box edit-box_auth">
-                <h2 className="auth__title">{name}</h2>
+                <h2 className="auth__title">
+                    {name}
+                </h2>
                 <input type="text"
                     className="auth__input"
                     name='email'
@@ -111,9 +83,19 @@ function Authorization({ props, handleRegistration, handleLogin, loggedIn }) {
                     name='password'
                     placeholder="Password"
                     onChange={handleChange}></input>
-                <button type="submit" id="login" className="edit-box__submit edit-box__submit_auth" name="edit-box-submit"
-                    aria-label="submit" value="Login" onClick={handleSubmit}>{name}</button>
-                <Link to={path} className="auth__text">{message}</Link>
+                <button type="submit"
+                    id="login"
+                    className="edit-box__submit edit-box__submit_auth"
+                    name="edit-box-submit"
+                    aria-label="submit"
+                    value="Login"
+                    onClick={handleSubmit}>
+                    {name}
+                </button>
+                <Link to={path}
+                    className="auth__text">
+                    {message}
+                </Link>
             </form>
         </section>
     )

@@ -11,14 +11,16 @@ import ConfirmDeletePopup from './ConfirmDeletePopup';
 import ImagePopup from './ImagePopup';
 import InfoTooltip from './InfoTooltip';
 import Footer from './Footer';
+import * as auth from '../utils/auth';
 import api from '../utils/api';
+import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import '../index.css';
 
 
 function App() {
 
-    // Retrieve User info in object______________________________________________________________________________________
+    // Retrieve User info in object_______________________________________________________________USERINFO_______________
     const [currentUser, setCurrentUser] = React.useState({
         name: '',
         about: '',
@@ -54,6 +56,7 @@ function App() {
         retrieveUserInfo();
     }, []);
 
+    // POPUPS_________________________________________________________________________________________POPUPS
 
     // State Variables for Popups
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -120,7 +123,7 @@ function App() {
             .catch(err => { console.log(err) })
     }
 
-    // CARDS____________________________________________________________________________________________________________
+    // CARDS____________________________________________________________________________________________CARDS_________
 
     // Cards state variable
     const [cards, setCards] = React.useState([]);
@@ -147,7 +150,6 @@ function App() {
             .catch(err => { console.log(err) });
     }
 
-
     // function for deleting a card
     function handleCardDelete(card) {
         handleConfirmDeleteClick(card);
@@ -172,6 +174,8 @@ function App() {
             .catch(err => { console.log(err) });
     }
 
+    // LOGIN AND AUTHORIZATION______________________________________________________________________AUTHORIZATION
+
     // state variable for determining whether on login or signup page
     const [authPage, setAuthPage] = React.useState({ name: 'Log in', path: '/login' });
 
@@ -188,8 +192,6 @@ function App() {
             path: '/login'
         })
     }
-
-    // AUTHORIZATION CODE_______________________________________________________________________-
 
     // state variable for determining whether logged in or not
     const [loggedIn, setLoggedIn] = React.useState(false);
@@ -222,6 +224,31 @@ function App() {
         message: "Already a member? Log in here!",
         clickSubmitButton: handleRegisterClick
     }
+
+    // state variable for userData for Login
+    const [userData, setUserData] = React.useState(null);
+
+    // variable for token
+    const token = localStorage.getItem('token');
+
+    // variable for history hook from react router
+    const history = useHistory();
+
+    React.useEffect(() => {
+        if (token) {
+          auth.checkToken(token).then((res) => {
+            if (res) {
+              const userData = {
+                username: res.username,
+                email: res.email,
+              };
+              setLoggedIn(true);
+              setUserData(userData);
+              history.push('/main');
+            }
+          });
+        }
+      }, [history, token]);
 
     // Components
     return (
