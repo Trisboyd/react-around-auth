@@ -31,9 +31,14 @@ function InfoTooltip(props) {
         <section className={`popup ${props.isOpen ? 'popup_visible' : ''}`}>
             <div className='popup__container'>
                 <div className='edit-box'>
-                <button className='popup__exit' type="button" aria-label="exit" onClick={props.onClose}></button>
-                <img className='edit-box__register-image' alt='NA' src={setImage()}/>
-                <h3 className="edit-box__register-message">{setMessage()}</h3>
+                    <button className='popup__exit'
+                        type="button"
+                        aria-label="exit"
+                        onClick={props.onClose}></button>
+                    <img className='edit-box__register-image'
+                        alt='NA'
+                        src={setImage()} />
+                    <h3 className="edit-box__register-message">{setMessage()}</h3>
                 </div>
             </div>
         </section>

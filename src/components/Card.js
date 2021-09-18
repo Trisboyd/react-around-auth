@@ -40,12 +40,20 @@ const Card = (props) => {
 
     return (
         <article className="place">
-            <button className={placeTrashClassName} type="button" aria-label="trash-button" onClick={handleDeleteClick}></button>
-            <img className="place__image" src={props.link} alt={props.name} onClick={handleClick} />
+            <button className={placeTrashClassName}
+                type="button" aria-label="trash-button"
+                onClick={handleDeleteClick}>
+            </button>
+            <img className="place__image"
+                src={props.link}
+                alt={props.name}
+                onClick={handleClick} />
             <div className="place__info">
                 <h2 className="place__name">{props.name}</h2>
                 <div className="place__info_like-column">
-                    <button className={placeButtonClassName} type="button" onClick={handleLikeClick}
+                    <button className={placeButtonClassName}
+                        type="button"
+                        onClick={handleLikeClick}
                         aria-label="like-button"></button>
                     <p className="place__like-count">{props.likes}</p>
                 </div>

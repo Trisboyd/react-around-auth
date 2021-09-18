@@ -25,20 +25,39 @@ function EditProfilePopup(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const info = {name: name, about: description}
+        const info = { name: name, about: description }
         props.onUpdateUser(info);
     }
 
 
     return (
-        <PopupWithForm name="edit-profile" title="Edit Profile" buttonText="Save" 
-        isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}>
-            <input type="text" value={name} id="profile-name" onChange={handleNameChange}
-                className="edit-box__text edit-box__text_type_name" name="name" minLength="2" maxLength="40" required />
-            <span className="edit-box__text-error edit-box__text-error_type_name" id="profile-name-error"></span>
-            <input type="text" value={description} id="profile-descriptor" onChange={handleDescriptionChange}
-                className="edit-box__text edit-box__text_type_descriptor" name="descriptor" minLength="2"
-                maxLength="200" required />
+        <PopupWithForm name="edit-profile"
+            title="Edit Profile"
+            buttonText="Save"
+            isOpen={props.isOpen}
+            onClose={props.onClose}
+            onSubmit={handleSubmit}>
+            <input type="text"
+                value={name}
+                id="profile-name"
+                onChange={handleNameChange}
+                className="edit-box__text edit-box__text_type_name"
+                name="name"
+                minLength="2"
+                maxLength="40"
+                required />
+            <span className="edit-box__text-error edit-box__text-error_type_name"
+                id="profile-name-error">
+            </span>
+            <input type="text"
+                value={description}
+                id="profile-descriptor"
+                onChange={handleDescriptionChange}
+                className="edit-box__text edit-box__text_type_descriptor"
+                name="descriptor"
+                minLength="2"
+                maxLength="200"
+                required />
             <span className="edit-box__text-error edit-box__text-error_type_descriptor"
                 id="profile-descriptor-error"></span>
         </PopupWithForm>

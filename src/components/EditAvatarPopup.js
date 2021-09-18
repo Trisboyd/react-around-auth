@@ -11,11 +11,21 @@ function EditAvatarPopup(props) {
     }
 
     return (
-        <PopupWithForm name="edit-avatar" title="Change Profile Picture" buttonText="Save" 
-        isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}>
-            <input type="url" placeholder="Avatar link" id="avatar-link" ref={avatarRef}
-                className="edit-box__text edit-box__text_type_descriptor" name="link" required />
-            <span className="edit-box__text-error edit-box__text-error_type_url" id="avatar-link-error"></span>
+        <PopupWithForm name="edit-avatar"
+            title="Change Profile Picture"
+            buttonText="Save"
+            isOpen={props.isOpen}
+            onClose={props.onClose}
+            onSubmit={handleSubmit}>
+            <input type="url"
+                placeholder="Avatar link"
+                id="avatar-link"
+                ref={avatarRef}
+                className="edit-box__text edit-box__text_type_descriptor"
+                name="link"
+                required />
+            <span className="edit-box__text-error edit-box__text-error_type_url"
+                id="avatar-link-error"></span>
         </PopupWithForm>
     )
 }
