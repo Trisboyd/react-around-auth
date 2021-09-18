@@ -8,7 +8,10 @@ function Header(props) {
         if (location.pathname === '/login') {
             props.showSignupPage();
         }
-        else props.showLoginPage();
+        if (location.pathname === '/signup') {
+            props.showLoginPage();
+        }
+        else props.signOut();
     }
 
     const location = useLocation();
@@ -27,7 +30,11 @@ function Header(props) {
         <header className="header">
             <img className="header__img" src={aroundTheUs} alt="Around the U.S." />
             {/* this link needs to be changed depending on whether not we are on the signup page or login page */}
-            <Link to={props.path} className="header__link"  onClick={setHeaderLink}>{setHeaderLinkText()}</Link>
+            <Link to={props.path}
+                className="header__link"
+                onClick={setHeaderLink}>
+                {setHeaderLinkText()}
+            </Link>
         </header>
     )
 }
