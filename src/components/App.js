@@ -66,9 +66,6 @@ function App() {
     const [selectedCard, setSelectedCard] = React.useState();
     const [cardForDelete, setCardForDelete] = React.useState();
 
-    // State Variable for Registration
-    const [isRegistered, setIsRegistered] = React.useState(false);
-
 
     // Popup functions for opening and closing
     function handleEditAvatarClick() {
@@ -192,8 +189,23 @@ function App() {
         })
     }
 
+    // AUTHORIZATION CODE_______________________________________________________________________-
+
     // state variable for determining whether logged in or not
     const [loggedIn, setLoggedIn] = React.useState(false);
+
+    // function for setting login
+    const handleLogin = () => {
+        setLoggedIn(true);
+    }
+
+    // State Variable for Registration
+    const [isRegistered, setIsRegistered] = React.useState(false);
+
+    // function for setting registration
+    const handleRegistration = () => {
+        setIsRegistered(true);
+    }
 
     // props Object for Login
     const loginProps = {
@@ -229,11 +241,14 @@ function App() {
                     <Route path='/login'>
                         <Authorization
                             props={loginProps}
+                            handleLogin={handleLogin}
+                            loggedIn={loggedIn}
                         />
                     </Route>
                     <Route path='/signup'>
                         <Authorization
-                            props={signupProps} />
+                            props={signupProps}
+                            handleRegistration={handleRegistration} />
                     </Route>
                 </Switch>
                 <Footer />
