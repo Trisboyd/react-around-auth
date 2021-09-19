@@ -263,7 +263,7 @@ function App() {
                     showSignupPage={showSignupPage}
                     signOut={signOut} />
                 <Switch>
-                    <ProtectedRoute path='/main'
+                    <ProtectedRoute exact path='/'
                         loggedIn={loggedIn}
                         component={<Main
                             onEditAvatarClick={handleEditAvatarClick}
