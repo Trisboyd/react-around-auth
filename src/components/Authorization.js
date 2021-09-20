@@ -33,7 +33,7 @@ function Authorization({ props, handleRegistration, handleLogin }) {
                     if (res) {
                         handleRegistration();
                         // handleLogin should maybe go here so user can get to /main
-                        history.push('/main');
+                        history.push('/');
                     }
                 })
         }
@@ -52,7 +52,7 @@ function Authorization({ props, handleRegistration, handleLogin }) {
                 }
                 if (data.token) {
                     handleLogin();
-                    history.push('/main');
+                    history.push('/');
                 }
             })
     }
