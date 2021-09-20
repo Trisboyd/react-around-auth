@@ -177,7 +177,7 @@ function App() {
     // LOGIN AND AUTHORIZATION______________________________________________________________________AUTHORIZATION
 
     // state variable for determining whether on login or signup page
-    const [authPage, setAuthPage] = React.useState({ name: 'Log in', path: '/login' });
+    const [authPage, setAuthPage] = React.useState({ name: 'Log in', path: '/signin' });
 
     function showLoginPage() {
         setAuthPage({
@@ -189,7 +189,7 @@ function App() {
     function showSignupPage() {
         setAuthPage({
             name: 'Log in',
-            path: '/login'
+            path: '/signin'
         })
     }
 
@@ -220,7 +220,7 @@ function App() {
     // props Object for Signup
     const signupProps = {
         name: "Sign up",
-        path: "/login",
+        path: "/signin",
         message: "Already a member? Log in here!",
         clickSubmitButton: handleRegisterClick
     }
@@ -249,7 +249,7 @@ function App() {
     //   function for signing out
     function signOut() {
         localStorage.removeItem('token');
-        history.push('/login');
+        history.push('/signin');
     }
 
     // Components
@@ -274,7 +274,7 @@ function App() {
                             handleCardLike={handleCardLike}
                             handleCardDelete={handleCardDelete} />}>
                     </ProtectedRoute>
-                    <Route path='/login'>
+                    <Route path='/signin'>
                         <Authorization
                             props={loginProps}
                             handleLogin={handleLogin}

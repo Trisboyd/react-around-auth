@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import * as auth from '../utils/auth';
 
-function Authorization({ props, handleRegistration, handleLogin, loggedIn }) {
+function Authorization({ props, handleRegistration, handleLogin }) {
 
     // constants and state variables________________________________________________
     const history = useHistory();
