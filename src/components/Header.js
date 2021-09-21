@@ -29,7 +29,7 @@ function Header(props) {
     return (
         <header className="header">
             <img className="header__img" src={aroundTheUs} alt="Around the U.S." />
-            {/* this link needs to be changed depending on whether not we are on the signup page or login page */}
+            <p className="header__email">{props.userEmail}</p>
             <Link to={props.path}
                 className="header__link"
                 onClick={setHeaderLink}>

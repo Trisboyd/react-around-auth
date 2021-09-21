@@ -36,6 +36,7 @@ function Authorization({ props, handleRegistration, handleLogin }) {
                         history.push('/');
                     }
                 })
+                .catch(error => console.log(error))
         }
         clickSubmitButton();
     }
@@ -55,6 +56,7 @@ function Authorization({ props, handleRegistration, handleLogin }) {
                     history.push('/');
                 }
             })
+            .catch(error => console.log(error))
     }
 
     // catch all for determining whether to register or login based on the submit button
@@ -68,7 +70,8 @@ function Authorization({ props, handleRegistration, handleLogin }) {
 
     return (
         <section className="auth">
-            <form className="edit-box edit-box_auth">
+            <form className="edit-box edit-box_auth"
+                onSubmit={handleSubmit}>
                 <h2 className="auth__title">
                     {name}
                 </h2>
@@ -76,20 +79,21 @@ function Authorization({ props, handleRegistration, handleLogin }) {
                     className="auth__input"
                     name='email'
                     placeholder="Email"
+                    value=''
                     onChange={handleChange}></input>
                 <input
                     type="text"
                     className="auth__input"
                     name='password'
                     placeholder="Password"
+                    value=''
                     onChange={handleChange}></input>
                 <button type="submit"
                     id="login"
                     className="edit-box__submit edit-box__submit_auth"
                     name="edit-box-submit"
                     aria-label="submit"
-                    value="Login"
-                    onClick={handleSubmit}>
+                    value="Login">
                     {name}
                 </button>
                 <Link to={path}

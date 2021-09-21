@@ -231,19 +231,26 @@ function App() {
     // variable for history hook from react router
     const history = useHistory();
 
-    React.useEffect(() => {
+    // state variable for userEmail
+    const [userEmail, setUserEmail] = React.useState('');
+
+    // function for checking token
+    const checkToken = () => {
         if (token) {
-            auth.checkToken(token).then((res) => {
+            auth.checkToken(token)
+            .then((res) => {
                 if (res) {
-                    const userData = {
-                        username: res.username,
-                        email: res.email,
-                    };
+                    setUserEmail(res.data.email);
                     setLoggedIn(true);
-                    history.push('/main');
+                    history.push('/');
                 }
-            });
+            })
+            .catch(error => {console.log(error)})
         }
+    }
+
+    React.useEffect(() => {
+        checkToken();
     }, [history, token]);
 
     //   function for signing out
@@ -261,9 +268,10 @@ function App() {
                     path={authPage.path}
                     showLoginPage={showLoginPage}
                     showSignupPage={showSignupPage}
-                    signOut={signOut} />
+                    signOut={signOut}
+                    userEmail={userEmail} />
                 <Switch>
-                    <ProtectedRoute exact path='/'
+                    <ProtectedRoute path='/'
                         loggedIn={loggedIn}
                         component={<Main
                             onEditAvatarClick={handleEditAvatarClick}
