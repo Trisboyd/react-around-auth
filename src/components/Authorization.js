@@ -79,14 +79,14 @@ function Authorization({ props, handleRegistration, handleLogin }) {
                     className="auth__input"
                     name='email'
                     placeholder="Email"
-                    value=''
+                    value={formState.email}
                     onChange={handleChange}></input>
                 <input
                     type="text"
                     className="auth__input"
                     name='password'
                     placeholder="Password"
-                    value=''
+                    value={formState.password}
                     onChange={handleChange}></input>
                 <button type="submit"
                     id="login"
