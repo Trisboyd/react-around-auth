@@ -271,7 +271,7 @@ function App() {
                     signOut={signOut}
                     userEmail={userEmail} />
                 <Switch>
-                    <ProtectedRoute path='/'
+                    <ProtectedRoute exact path='/'
                         loggedIn={loggedIn}
                         component={<Main
                             onEditAvatarClick={handleEditAvatarClick}
