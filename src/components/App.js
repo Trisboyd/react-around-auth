@@ -193,6 +193,13 @@ function App() {
         })
     }
 
+    function showMainPage() {
+        setAuthPage({
+            name: 'Log out',
+            path: 'signin'
+        })
+    }
+
     // state variable for determining whether logged in or not
     const [loggedIn, setLoggedIn] = React.useState(false);
 
@@ -275,8 +282,10 @@ function App() {
 
     //   function for signing out
     function signOut() {
-        localStorage.removeItem('token');
         history.push('/signin');
+        localStorage.removeItem('token');
+        setLoggedIn(false);
+        setUserEmail('');
     }
 
     // Components
@@ -288,6 +297,7 @@ function App() {
                     path={authPage.path}
                     showLoginPage={showLoginPage}
                     showSignupPage={showSignupPage}
+                    showMainPage={showMainPage}
                     signOut={signOut}
                     userEmail={userEmail} />
                 <Switch>

@@ -5,19 +5,22 @@ import { Link, useLocation } from 'react-router-dom';
 function Header(props) {
 
     const setHeaderLink = () => {
-        if (location.pathname === '/login') {
+        if (location.pathname === '/signin') {
             props.showSignupPage();
         }
         if (location.pathname === '/signup') {
             props.showLoginPage();
         }
-        else props.signOut();
+        else {
+            props.showMainPage();
+            props.signOut();
+        }
     }
 
     const location = useLocation();
 
     const setHeaderLinkText = () => {
-        if (location.pathname === '/login') {
+        if (location.pathname === '/signin') {
             return "Sign up"
         }
         if (location.pathname === '/signup') {
