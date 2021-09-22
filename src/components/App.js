@@ -197,15 +197,34 @@ function App() {
     const [loggedIn, setLoggedIn] = React.useState(false);
 
     // function for setting login
-    const handleLogin = () => {
-        setLoggedIn(true);
+    function handleLogin(formState) {
+        auth.authorize(formState)
+            .then((data) => {
+                if (!data) {
+                    return;
+                }
+                if (data.token) {
+                    setLoggedIn(true);
+                    history.push('/');
+                }
+            })
+            .catch(error => console.log(error))
     }
 
     // State Variable for Registration
     const [isRegistered, setIsRegistered] = React.useState(false);
 
     // function for setting registration
-    const handleRegistration = () => {
+    function handleRegistration(formState) {
+        auth.register(formState)
+            .then((res) => {
+                if (res) {
+                    setIsRegistered(true);
+                    setLoggedIn(true);
+                    history.push('/');
+                }
+            })
+            .catch(error => console.log(error))
         setIsRegistered(true);
     }
 
@@ -222,6 +241,7 @@ function App() {
         name: "Sign up",
         path: "/signin",
         message: "Already a member? Log in here!",
+        setHeaderLink: showLoginPage,
         clickSubmitButton: handleRegisterClick
     }
 
@@ -238,14 +258,14 @@ function App() {
     const checkToken = () => {
         if (token) {
             auth.checkToken(token)
-            .then((res) => {
-                if (res) {
-                    setUserEmail(res.data.email);
-                    setLoggedIn(true);
-                    history.push('/');
-                }
-            })
-            .catch(error => {console.log(error)})
+                .then((res) => {
+                    if (res) {
+                        setUserEmail(res.data.email);
+                        setLoggedIn(true);
+                        history.push('/');
+                    }
+                })
+                .catch(error => { console.log(error) })
         }
     }
 
@@ -285,14 +305,12 @@ function App() {
                     <Route path='/signin'>
                         <Authorization
                             props={loginProps}
-                            handleLogin={handleLogin}
-                            loggedIn={loggedIn}
-                        />
+                            handleAuthorization={handleLogin} />
                     </Route>
                     <Route path='/signup'>
                         <Authorization
                             props={signupProps}
-                            handleRegistration={handleRegistration} />
+                            handleAuthorization={handleRegistration} />
                     </Route>
                 </Switch>
                 <Footer />

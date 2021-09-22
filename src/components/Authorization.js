@@ -1,12 +1,9 @@
 import React from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
-import * as auth from '../utils/auth';
+import { Link, useLocation } from 'react-router-dom';
 
-function Authorization({ props, handleRegistration, handleLogin }) {
+function Authorization({ props, handleAuthorization }) {
 
     // constants and state variables________________________________________________
-    const history = useHistory();
-
     const location = useLocation();
 
     const { name, message, path, clickSubmitButton } = props;
@@ -28,17 +25,9 @@ function Authorization({ props, handleRegistration, handleLogin }) {
     // function for handling a new registration
     const handleRegister = () => {
         if (formState.email && formState.password) {
-            auth.register(formState)
-                .then((res) => {
-                    if (res) {
-                        handleRegistration();
-                        // handleLogin should maybe go here so user can get to /main
-                        history.push('/');
-                    }
-                })
-                .catch(error => console.log(error))
+            handleAuthorization(formState);
+            clickSubmitButton();
         }
-        clickSubmitButton();
     }
 
     // function for handling a login
@@ -46,17 +35,7 @@ function Authorization({ props, handleRegistration, handleLogin }) {
         if (!formState.email || !formState.password) {
             return false;
         }
-        auth.authorize(formState)
-            .then((data) => {
-                if (!data) {
-                    return;
-                }
-                if (data.token) {
-                    handleLogin();
-                    history.push('/');
-                }
-            })
-            .catch(error => console.log(error))
+        handleAuthorization(formState);
     }
 
     // catch all for determining whether to register or login based on the submit button
@@ -72,9 +51,7 @@ function Authorization({ props, handleRegistration, handleLogin }) {
         <section className="auth">
             <form className="edit-box edit-box_auth"
                 onSubmit={handleSubmit}>
-                <h2 className="auth__title">
-                    {name}
-                </h2>
+                <h2 className="auth__title">{name}</h2>
                 <input type="text"
                     className="auth__input"
                     name='email'
