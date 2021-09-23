@@ -177,29 +177,29 @@ function App() {
     // LOGIN AND AUTHORIZATION______________________________________________________________________AUTHORIZATION
 
     // state variable for determining whether on login or signup page
-    const [authPage, setAuthPage] = React.useState({ name: 'Log in', path: '/signin' });
+    const [headerLink, setHeaderLink] = React.useState({name: 'Log in', path: '/signin' });
 
-    function showLoginPage() {
-        setAuthPage({
+    const setLoginPath = () => {
+        setHeaderLink({
+            name: 'Log in',
+            path: '/signin' 
+        })
+    }
+
+    const setRegisterPath = () => {
+        setHeaderLink({
             name: 'Sign up',
             path: '/signup'
         })
-    };
+    }
 
-    function showSignupPage() {
-        setAuthPage({
-            name: 'Log in',
+    const setLogoutPath = () => {
+        setHeaderLink({
+            name: 'Log out',
             path: '/signin'
         })
     }
-
-    function showMainPage() {
-        setAuthPage({
-            name: 'Log out',
-            path: 'signin'
-        })
-    }
-
+    
     // state variable for determining whether logged in or not
     const [loggedIn, setLoggedIn] = React.useState(false);
 
@@ -240,7 +240,6 @@ function App() {
         name: "Log in",
         path: "/signup",
         message: "Not a member? Sign up here!",
-        setHeaderLink: showSignupPage
     }
 
     // props Object for Signup
@@ -248,7 +247,6 @@ function App() {
         name: "Sign up",
         path: "/signin",
         message: "Already a member? Log in here!",
-        setHeaderLink: showLoginPage,
         clickSubmitButton: handleRegisterClick
     }
 
@@ -293,11 +291,11 @@ function App() {
 
         <div>
             <CurrentUserContext.Provider value={currentUser}>
-                <Header name={authPage.name}
-                    path={authPage.path}
-                    showLoginPage={showLoginPage}
-                    showSignupPage={showSignupPage}
-                    showMainPage={showMainPage}
+                <Header 
+                    headerLink={headerLink}
+                    setLoginPath={setLoginPath}
+                    setRegisterPath={setRegisterPath}
+                    setLogoutPath={setLogoutPath}
                     signOut={signOut}
                     userEmail={userEmail} />
                 <Switch>

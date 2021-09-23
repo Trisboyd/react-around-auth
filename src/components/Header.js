@@ -4,39 +4,39 @@ import { Link, useLocation } from 'react-router-dom';
 
 function Header(props) {
 
+    const location = useLocation();
+
     const setHeaderLink = () => {
         if (location.pathname === '/signin') {
-            props.showSignupPage();
+            props.setRegisterPath();
         }
         if (location.pathname === '/signup') {
-            props.showLoginPage();
+            props.setLoginPath();
         }
-        else {
-            props.showMainPage();
-            props.signOut();
+        if (location.pathname === '/') {
+            props.setLogoutPath();
         }
     }
 
-    const location = useLocation();
+    const signOut = () => {
+        if (location.pathname === '/') {
+            props.signOut();
+        }
+        else return;
+    }
 
-    const setHeaderLinkText = () => {
-        if (location.pathname === '/signin') {
-            return "Sign up"
-        }
-        if (location.pathname === '/signup') {
-            return "Log in"
-        }
-        else return 'Log out'
-    };
+    React.useEffect(() => {
+        setHeaderLink();
+    }, [location]);
 
     return (
         <header className="header">
             <img className="header__img" src={aroundTheUs} alt="Around the U.S." />
             <p className="header__email">{props.userEmail}</p>
-            <Link to={props.path}
+            <Link to={props.headerLink.path}
                 className="header__link"
-                onClick={setHeaderLink}>
-                {setHeaderLinkText()}
+                onClick={signOut}>
+                {props.headerLink.name}
             </Link>
         </header>
     )
