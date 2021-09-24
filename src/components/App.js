@@ -177,12 +177,12 @@ function App() {
     // LOGIN AND AUTHORIZATION______________________________________________________________________AUTHORIZATION
 
     // state variable for determining whether on login or signup page
-    const [headerLink, setHeaderLink] = React.useState({name: 'Log in', path: '/signin' });
+    const [headerLink, setHeaderLink] = React.useState({ name: 'Log in', path: '/signin' });
 
     const setLoginPath = () => {
         setHeaderLink({
             name: 'Log in',
-            path: '/signin' 
+            path: '/signin'
         })
     }
 
@@ -199,7 +199,7 @@ function App() {
             path: '/signin'
         })
     }
-    
+
     // state variable for determining whether logged in or not
     const [loggedIn, setLoggedIn] = React.useState(false);
 
@@ -226,13 +226,15 @@ function App() {
         auth.register(formState)
             .then((res) => {
                 if (res) {
+                    console.log(res);
                     setIsRegistered(true);
-                    setLoggedIn(true);
-                    history.push('/');
                 }
             })
-            .catch(error => console.log(error))
-        setIsRegistered(true);
+            .catch(error => {
+                console.log(error);
+            })
+            .finally(
+                handleRegisterClick());
     }
 
     // props Object for Login
@@ -291,7 +293,7 @@ function App() {
 
         <div>
             <CurrentUserContext.Provider value={currentUser}>
-                <Header 
+                <Header
                     headerLink={headerLink}
                     setLoginPath={setLoginPath}
                     setRegisterPath={setRegisterPath}

@@ -29,7 +29,7 @@ export const authorize = ({ email, password }) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then(response => response.json())
+    .then(response => checkResponse(response))
     .then((data) => {
       console.log(data);
       if (data.token) {
@@ -48,7 +48,7 @@ export const checkToken = (token) => {
       'Authorization': `Bearer ${token}`,
     }
   })
-    .then(res => res.json())
+    .then(response => checkResponse(response))
     .then(data => data)
 }
 

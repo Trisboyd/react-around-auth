@@ -28,6 +28,9 @@ function Authorization({ props, handleAuthorization }) {
             handleAuthorization(formState);
             clickSubmitButton();
         }
+        else (
+            console.log("Email and password required")
+        )
     }
 
     // function for handling a login
