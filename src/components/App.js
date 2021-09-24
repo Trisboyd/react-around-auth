@@ -232,9 +232,11 @@ function App() {
             })
             .catch(error => {
                 console.log(error);
+                setIsRegistered(false);
             })
-            .finally(
-                handleRegisterClick());
+            .finally(() => {
+                handleRegisterClick();
+            })
     }
 
     // props Object for Login

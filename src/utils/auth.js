@@ -13,7 +13,7 @@ export const register = ({ email, password }) => {
     body: JSON.stringify({ email, password })
   })
     .then((response) => {
-      checkResponse(response);
+      return checkResponse(response);
     })
     .then((res) => {
       return res;
@@ -54,12 +54,10 @@ export const checkToken = (token) => {
 
 // Check if response is valid
 const checkResponse = (response) => {
-  try {
-    if (response.ok) {
-      console.log(response)
-      return response.json();
-    }
-  } catch (event) {
-    return Promise.reject(`Error: ${event.status}`)
+  if (response.ok) {
+    return response.json()
+  }
+  else {
+    return Promise.reject(`Error: ${response.status}`)
   }
 }
