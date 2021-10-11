@@ -2,7 +2,7 @@
   "name": "around-react-auth",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Trisboyd.github.io/around-react",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -19,8 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "pre-deploy": "npm run build",
+    "deploy": "npm run build && scp -r ./build/* trisboyd@boydaround.students.nomoreparties.site:/home/trisboyd/react-around-api-full/frontend"
   },
   "eslintConfig": {
     "extends": [

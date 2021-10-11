@@ -132,8 +132,8 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: "https://around.nomoreparties.co/v1/group-12",
-    auth: "aa7e78f0-aba7-4938-a0ab-42cab952d914"
+    baseUrl: "https://www.boydaround.students.nomoreparties.site",
+    // auth: "aa7e78f0-aba7-4938-a0ab-42cab952d914"
 })
 
 export default api;
