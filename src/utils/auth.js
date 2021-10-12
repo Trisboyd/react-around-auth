@@ -1,5 +1,5 @@
 //   Routes code
-export const BASE_URL = 'https://register.nomoreparties.co';
+export const BASE_URL = 'https://api.boydaround.students.nomoreparties.site';
 
 // auth.js
 

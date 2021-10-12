@@ -29,7 +29,7 @@ function App() {
     });
 
     const retrieveUserInfo = () => {
-        api.getProfile().then(res => {
+        api.getProfile(token).then(res => {
             setUserInfo(res);
             setAvatar(res.avatar);
         })
@@ -107,7 +107,7 @@ function App() {
 
     // function for changing user info in the API based on inputs
     function handleUpdateUser(data) {
-        api.changeProfile(data).then(res => {
+        api.changeProfile(data, token).then(res => {
             setUserInfo(data);
             closeAllPopups();
         })
@@ -116,7 +116,7 @@ function App() {
 
     // change avatar in the server
     function handleUpdateAvatar(data) {
-        api.changeAvatar(data).then(res => {
+        api.changeAvatar(data, token).then(res => {
             setAvatar(data);
             closeAllPopups();
         })
@@ -130,7 +130,7 @@ function App() {
 
     // function that fetches cards
     function addCards() {
-        api.getCardList().then(res => {
+        api.getCardList(token).then(res => {
             setCards([...cards, ...res]);
         })
             .catch(err => { console.log(err) })
@@ -144,7 +144,7 @@ function App() {
     // function for sending card likes or unlikes to API and resetting the status accordingly
     function handleCardLike(card) {
         const isLiked = card.likes.some(cardLike => cardLike._id === currentUser.id);
-        api.changeLikeCardStatus(card._id, isLiked).then((likedCard) => {
+        api.changeLikeCardStatus(card._id, isLiked, token).then((likedCard) => {
             setCards(cards.map((cardItem) => cardItem._id === card._id ? likedCard : cardItem));
         })
             .catch(err => { console.log(err) });
@@ -157,7 +157,7 @@ function App() {
 
     // confirm deletion of card
     function confirmDeleteClick() {
-        api.deleteCard(cardForDelete._id).then(res => {
+        api.deleteCard(cardForDelete._id, token).then(res => {
             setCards(cards.filter((cardItem) => cardItem._id !== cardForDelete._id))
             setCardForDelete();
             closeAllPopups();
@@ -167,7 +167,7 @@ function App() {
 
     // function for adding a card
     function addCardHandler(cardData) {
-        api.addCard(cardData).then(res => {
+        api.addCard(cardData, token).then(res => {
             setCards([res, ...cards])
             closeAllPopups();
         })
