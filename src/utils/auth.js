@@ -4,7 +4,7 @@ export const BASE_URL = 'https://api.boydaround.students.nomoreparties.site';
 // auth.js
 
 export const register = ({ email, password }) => {
-  console.log('Boogah Boogah')
+  console.log('yakka foob')
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
@@ -40,6 +40,7 @@ export const authorize = ({ email, password }) => {
         return data;
       }
     })
+    .catch(error => console.log(error))
 };
 
 export const checkToken = (token) => {
