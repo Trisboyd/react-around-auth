@@ -1,10 +1,9 @@
 //   Routes code
-export const BASE_URL = 'https://api.boydaround.students.nomoreparties.site';
+export const BASE_URL = 'http://localhost:3000';
 
 // auth.js
 
 export const register = ({ email, password }) => {
-  console.log('yakka foob')
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {

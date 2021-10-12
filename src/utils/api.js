@@ -131,7 +131,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: "https://www.boydaround.students.nomoreparties.site",
+    baseUrl: "http://localhost:3000",
     // auth: "aa7e78f0-aba7-4938-a0ab-42cab952d914"
 })
 
