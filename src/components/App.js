@@ -20,160 +20,6 @@ import '../index.css';
 
 function App() {
 
-    // Retrieve User info in object_______________________________________________________________USERINFO_______________
-    const [currentUser, setCurrentUser] = React.useState({
-        name: '',
-        about: '',
-        avatar: '',
-        id: ''
-    });
-
-    const retrieveUserInfo = () => {
-        api.getProfile(token).then(res => {
-            setUserInfo(res);
-            setAvatar(res.avatar);
-        })
-            .catch(err => { console.log(err) })
-    }
-
-    const setAvatar = (link) => {
-        setCurrentUser((prevCurrentUser) => ({
-            ...prevCurrentUser,
-            avatar: link
-        }));
-    }
-
-    const setUserInfo = (data) => {
-        setCurrentUser((prevCurrentUser) => ({
-            ...prevCurrentUser,
-            name: data.name,
-            about: data.about,
-            id: data._id,
-        }));
-    }
-
-    React.useEffect(() => {
-        retrieveUserInfo();
-    }, []);
-
-    // POPUPS_________________________________________________________________________________________POPUPS
-
-    // State Variables for Popups
-    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-    const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
-    const [isRegisteredPopupOpen, setIsRegisteredPopupOpen] = React.useState(false);
-
-    // State variables for cards
-    const [selectedCard, setSelectedCard] = React.useState();
-    const [cardForDelete, setCardForDelete] = React.useState();
-
-
-    // Popup functions for opening and closing
-    function handleEditAvatarClick() {
-        setIsEditAvatarPopupOpen(true);
-    }
-
-    function handleEditProfileClick() {
-        setIsEditProfilePopupOpen(true);
-    }
-
-    function handleAddPlaceClick() {
-        setIsAddPlacePopupOpen(true);
-    }
-
-    function handleConfirmDeleteClick(card) {
-        setIsConfirmDeletePopupOpen(true);
-        setCardForDelete(card);
-    }
-
-    function handleCardClick(card) {
-        setSelectedCard(card);
-    }
-
-    function handleRegisterClick() {
-        setIsRegisteredPopupOpen(true);
-    }
-
-    function closeAllPopups() {
-        setIsAddPlacePopupOpen(false);
-        setIsEditAvatarPopupOpen(false);
-        setIsEditProfilePopupOpen(false);
-        setIsConfirmDeletePopupOpen(false);
-        setIsRegisteredPopupOpen(false);
-        setSelectedCard();
-    }
-
-    // function for changing user info in the API based on inputs
-    function handleUpdateUser(data) {
-        api.changeProfile(data, token).then(res => {
-            setUserInfo(data);
-            closeAllPopups();
-        })
-            .catch(err => { console.log(err) })
-    }
-
-    // change avatar in the server
-    function handleUpdateAvatar(data) {
-        api.changeAvatar(data, token).then(res => {
-            setAvatar(data);
-            closeAllPopups();
-        })
-            .catch(err => { console.log(err) })
-    }
-
-    // CARDS____________________________________________________________________________________________CARDS_________
-
-    // Cards state variable
-    const [cards, setCards] = React.useState([]);
-
-    // function that fetches cards
-    function addCards() {
-        api.getCardList(token).then(res => {
-            setCards([...cards, ...res]);
-        })
-            .catch(err => { console.log(err) })
-    }
-
-    // call cards and profile using hook's "useEffect"
-    React.useEffect(() => {
-        addCards();
-    }, []);
-
-    // function for sending card likes or unlikes to API and resetting the status accordingly
-    function handleCardLike(card) {
-        const isLiked = card.likes.some(cardLike => cardLike._id === currentUser.id);
-        api.changeLikeCardStatus(card._id, isLiked, token).then((likedCard) => {
-            setCards(cards.map((cardItem) => cardItem._id === card._id ? likedCard : cardItem));
-        })
-            .catch(err => { console.log(err) });
-    }
-
-    // function for deleting a card
-    function handleCardDelete(card) {
-        handleConfirmDeleteClick(card);
-    }
-
-    // confirm deletion of card
-    function confirmDeleteClick() {
-        api.deleteCard(cardForDelete._id, token).then(res => {
-            setCards(cards.filter((cardItem) => cardItem._id !== cardForDelete._id))
-            setCardForDelete();
-            closeAllPopups();
-        })
-            .catch(err => { console.log(err) });
-    }
-
-    // function for adding a card
-    function addCardHandler(cardData) {
-        api.addCard(cardData, token).then(res => {
-            setCards([res, ...cards])
-            closeAllPopups();
-        })
-            .catch(err => { console.log(err) });
-    }
-
     // LOGIN AND AUTHORIZATION______________________________________________________________________AUTHORIZATION
 
     // state variable for determining whether on login or signup page
@@ -269,7 +115,7 @@ function App() {
             auth.checkToken(token)
                 .then((res) => {
                     if (res) {
-                        setUserEmail(res.data.email);
+                        setUserEmail(res.userProfile.email);
                         setLoggedIn(true);
                         history.push('/');
                     }
@@ -290,7 +136,162 @@ function App() {
         setUserEmail('');
     }
 
-    // Components
+    // Retrieve User info in object_______________________________________________________________USERINFO_______________
+    const [currentUser, setCurrentUser] = React.useState({
+        name: '',
+        about: '',
+        avatar: '',
+        id: ''
+    });
+
+    const retrieveUserInfo = () => {
+        api.getProfile(token).then(res => {
+            setUserInfo(res.userProfile);
+            setAvatar(res.userProfile.avatar);
+        })
+            .catch(err => { console.log(err) })
+    }
+
+    const setAvatar = (link) => {
+        setCurrentUser((prevCurrentUser) => ({
+            ...prevCurrentUser,
+            avatar: link
+        }));
+    }
+
+    const setUserInfo = (data) => {
+        setCurrentUser((prevCurrentUser) => ({
+            ...prevCurrentUser,
+            name: data.name,
+            about: data.about,
+            id: data._id,
+        }));
+    }
+
+    React.useEffect(() => {
+        retrieveUserInfo();
+    }, []);
+
+    // POPUPS_________________________________________________________________________________________POPUPS
+
+    // State Variables for Popups
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
+    const [isRegisteredPopupOpen, setIsRegisteredPopupOpen] = React.useState(false);
+
+    // State variables for cards
+    const [selectedCard, setSelectedCard] = React.useState();
+    const [cardForDelete, setCardForDelete] = React.useState();
+
+
+    // Popup functions for opening and closing
+    function handleEditAvatarClick() {
+        setIsEditAvatarPopupOpen(true);
+    }
+
+    function handleEditProfileClick() {
+        setIsEditProfilePopupOpen(true);
+    }
+
+    function handleAddPlaceClick() {
+        setIsAddPlacePopupOpen(true);
+    }
+
+    function handleConfirmDeleteClick(card) {
+        setIsConfirmDeletePopupOpen(true);
+        setCardForDelete(card);
+    }
+
+    function handleCardClick(card) {
+        setSelectedCard(card);
+    }
+
+    function handleRegisterClick() {
+        setIsRegisteredPopupOpen(true);
+    }
+
+    function closeAllPopups() {
+        setIsAddPlacePopupOpen(false);
+        setIsEditAvatarPopupOpen(false);
+        setIsEditProfilePopupOpen(false);
+        setIsConfirmDeletePopupOpen(false);
+        setIsRegisteredPopupOpen(false);
+        setSelectedCard();
+    }
+
+    // function for changing user info in the API based on inputs
+    function handleUpdateUser(data) {
+        api.changeProfile(data, token).then(res => {
+            setUserInfo(data);
+            closeAllPopups();
+        })
+            .catch(err => { console.log(err) })
+    }
+
+    // change avatar in the server
+    function handleUpdateAvatar(link) {
+        api.changeAvatar(link, token).then(res => {
+            setAvatar(res);
+            closeAllPopups();
+        })
+            .catch(err => { console.log(err) })
+    }
+
+    // CARDS____________________________________________________________________________________________CARDS_________
+
+    // Cards state variable
+    const [cards, setCards] = React.useState([]);
+
+    // function that fetches cards
+    function addCards() {
+        api.getCardList(token).then(res => {
+            setCards([...cards, ...res.cards]);
+        })
+            .catch(err => { console.log(err) })
+    }
+
+    // call cards and profile using hook's "useEffect"
+    React.useEffect(() => {
+        addCards();
+    }, [token]);
+
+    // function for sending card likes or unlikes to API and resetting the status accordingly
+    function handleCardLike(card) {
+        const isLiked = card.likes.some(cardLike => cardLike === currentUser.id);
+        api.changeLikeCardStatus(card._id, isLiked, token).then((likedCard) => {
+            setCards(cards.map((cardItem) => cardItem._id === card._id ? likedCard.cardData : cardItem));
+        })
+            .catch(err => { console.log(err) });
+    }
+
+    // function for deleting a card
+    function handleCardDelete(card) {
+        handleConfirmDeleteClick(card);
+    }
+
+    // confirm deletion of card
+    function confirmDeleteClick() {
+        console.log(cardForDelete);
+        api.deleteCard(cardForDelete._id, token).then(res => {
+            setCards(cards.filter((cardItem) => cardItem._id !== cardForDelete._id))
+            setCardForDelete();
+            closeAllPopups();
+        })
+            .catch(err => { console.log(err) });
+    }
+
+    // function for adding a card
+    function addCardHandler(cardData) {
+        api.addCard(cardData, token).then(res => {
+            setCards([res.data, ...cards])
+            closeAllPopups();
+        })
+            .catch(err => { console.log(err) });
+    }
+
+    // Components_____________________________________________________________________Components
     return (
 
         <div>

@@ -31,7 +31,7 @@ const Card = (props) => {
     );
 
     // check if the user has liked a card
-    const isLiked = props.card.likes.some(i => i._id === currentUser.id);
+    const isLiked = props.card.likes.some(i => i === currentUser.id);
 
     // create a variable to set classname for like button
     const placeButtonClassName = (
