@@ -131,7 +131,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: "http://api.boydaround.students.nomoreparties.site",
+    baseUrl: "https://api.boydaround.students.nomoreparties.site",
     // auth: "aa7e78f0-aba7-4938-a0ab-42cab952d914"
 })
 
