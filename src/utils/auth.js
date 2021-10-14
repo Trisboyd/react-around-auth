@@ -1,5 +1,5 @@
 //   Routes code
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'http://api.boydaround.students.nomoreparties.site';
 
 // auth.js
 
