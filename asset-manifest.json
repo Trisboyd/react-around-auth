@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "./static/css/main.2b5b94e1.chunk.css",
-    "main.js": "./static/js/main.720cbc35.chunk.js",
-    "main.js.map": "./static/js/main.720cbc35.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.caaf9b55.js",
-    "runtime-main.js.map": "./static/js/runtime-main.caaf9b55.js.map",
-    "static/js/2.7eb9235e.chunk.js": "./static/js/2.7eb9235e.chunk.js",
-    "static/js/2.7eb9235e.chunk.js.map": "./static/js/2.7eb9235e.chunk.js.map",
-    "static/js/3.65da48f8.chunk.js": "./static/js/3.65da48f8.chunk.js",
-    "static/js/3.65da48f8.chunk.js.map": "./static/js/3.65da48f8.chunk.js.map",
-    "index.html": "./index.html",
-    "static/css/main.2b5b94e1.chunk.css.map": "./static/css/main.2b5b94e1.chunk.css.map",
-    "static/js/2.7eb9235e.chunk.js.LICENSE.txt": "./static/js/2.7eb9235e.chunk.js.LICENSE.txt",
-    "static/media/index.css": "./static/media/heart.99043841.svg",
-    "static/media/aroundtheus.c7581985.svg": "./static/media/aroundtheus.c7581985.svg"
+    "main.css": "/react-around-auth/static/css/main.3384503b.chunk.css",
+    "main.js": "/react-around-auth/static/js/main.ffcbcd58.chunk.js",
+    "main.js.map": "/react-around-auth/static/js/main.ffcbcd58.chunk.js.map",
+    "runtime-main.js": "/react-around-auth/static/js/runtime-main.d7f18dc5.js",
+    "runtime-main.js.map": "/react-around-auth/static/js/runtime-main.d7f18dc5.js.map",
+    "static/js/2.7eb9235e.chunk.js": "/react-around-auth/static/js/2.7eb9235e.chunk.js",
+    "static/js/2.7eb9235e.chunk.js.map": "/react-around-auth/static/js/2.7eb9235e.chunk.js.map",
+    "static/js/3.65da48f8.chunk.js": "/react-around-auth/static/js/3.65da48f8.chunk.js",
+    "static/js/3.65da48f8.chunk.js.map": "/react-around-auth/static/js/3.65da48f8.chunk.js.map",
+    "index.html": "/react-around-auth/index.html",
+    "static/css/main.3384503b.chunk.css.map": "/react-around-auth/static/css/main.3384503b.chunk.css.map",
+    "static/js/2.7eb9235e.chunk.js.LICENSE.txt": "/react-around-auth/static/js/2.7eb9235e.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/react-around-auth/static/media/heart.99043841.svg",
+    "static/media/aroundtheus.c7581985.svg": "/react-around-auth/static/media/aroundtheus.c7581985.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.caaf9b55.js",
+    "static/js/runtime-main.d7f18dc5.js",
     "static/js/2.7eb9235e.chunk.js",
-    "static/css/main.2b5b94e1.chunk.css",
-    "static/js/main.720cbc35.chunk.js"
+    "static/css/main.3384503b.chunk.css",
+    "static/js/main.ffcbcd58.chunk.js"
   ]
 }
